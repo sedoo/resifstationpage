@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
-
 import matplotlib
 matplotlib.use("Agg")
 import xml.etree.ElementTree as ET
@@ -14,6 +13,11 @@ from copy import deepcopy
 import sys
 import os
 
+workingFolder ='.'
+if len(sys.argv)>1:
+    workingFolder = sys.argv[1]
+   
+print("Working folder: "+workingFolder)
 
 if os.environ.get('DISPLAY','') == '':
     print('no display found. Using :0.0')
@@ -346,10 +350,10 @@ t0 = UTCDateTime()
 t1 = t0 - deltaT
 #t1 = UTCDateTime("2022-09-19T18:00:00")
 
-stationsXML = './stations_FR.xml'
+stationsXML = workingFolder+'/stations_FR.xml'
 
 # verification de l'arborescence des répertoires et de la présence des fichiers
-os.makedirs("./jpg", exist_ok=True)
+os.makedirs(workingFolder+"/jpg", exist_ok=True)
 if os.path.exists(stationsXML):
     pass
 else:
