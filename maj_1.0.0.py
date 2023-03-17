@@ -460,3 +460,6 @@ for evt in liste_Evt:
 
 _pretty_print(stations)
 print(ET.tostring(stations))
+
+with open(stationsXML, 'wb') as f:
+    xml.write(f, encoding='utf-8')
