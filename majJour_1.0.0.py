@@ -47,7 +47,8 @@ for sta in liste_Stations[0]:
     try:
         ficstat = workingFolder+"/jpg/%s_stats.jpg" % sta.code
         ficjson = workingFolder+"/json/%s.json" % sta.code
-        subprocess.run(["./stat_ws_json.py", sta.code, "-b", ficstat, "-o", ficjson])
+        pythonEnvPath = "../venv/bin/python"
+        subprocess.run([pythonEnvPath, "./stat_ws_json.py", sta.code, "-b", ficstat, "-o", ficjson])
         print("===> %s" % ficstat)
         print("===> %s" % ficjson)
     except:
