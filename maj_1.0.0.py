@@ -269,7 +269,9 @@ class Station:
                 print('Pas de data\n%s' % err)
                 self.id[key].result = "false"
                 continue
-            st_f = st[0].filter("highpass", freq=2, corners=2, zerophase=True)
+            #st_f = st[0].filter("highpass", freq=2, corners=2, zerophase=True)
+            tr = st[0].copy()
+            st_f = tr.filter("highpass", freq=2, corners=2, zerophase=True)
             df = st[0].stats.sampling_rate
             cft = classic_sta_lta(st_f, int(df / 2), int(df * 5))
             #plot_trigger(st_f, cft, 7, 4)
@@ -293,9 +295,13 @@ class Station:
             t0 = UTCDateTime(self.id[key].tP) - int(self.id[key].duree) / 5
             t1 = UTCDateTime(self.id[key].tP) + int(self.id[key].duree)
             print("%s creation jpg st.plot(starttime=%s, endtime=%s, outfile='./jpg/%s_trace_%s.jpg'" % (key, t0, t1, key, self.id[key].dflag))
-            st = client.get_waveforms("FR", key, "00", "HHZ", t0, t1)
-            self.id[key].st.plot(starttime=t0, endtime=t1, outfile="./jpg/%s_trace_%s.jpg" % (key, self.id[key].dflag))
+            if self.id[key].distance <= 5:
+                st_f = self.id[key].st.filter("highpass", freq=2, corners=2, zerophase=True)
+                st_f.plot(starttime=t0+5, endtime=t1, outfile="./jpg/%s_trace_%s.jpg" % (key, self.id[key].dflag), linewidth="0.3")
+            else:
+                self.id[key].st.plot(starttime=t0, endtime=t1, outfile="./jpg/%s_trace_%s.jpg" % (key, self.id[key].dflag), linewidth="0.3")
 
+            
     def modif_xml (self, evt, xml):
 
         for key, value in self.id.items():
