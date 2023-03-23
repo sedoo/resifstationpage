@@ -14,6 +14,7 @@ import sys
 import os
 
 workingFolder ='.'
+
 if len(sys.argv)>1:
     workingFolder = sys.argv[1]
    
@@ -333,7 +334,7 @@ class Station:
             element[n].set('lon', str(evt.origins[0].longitude))
             element[n].set('mag', str(evt.magnitudes[0].mag))
             element[n].set('dist', str(self.id[key].distance))
-            element[n].find('trace').text = "%s/jpg/%s_trace_%s.jpg" % (workingFolder, key, self.id[key].dflag)
+            element[n].find('trace').text = "%s_trace_%s.jpg" % (key, self.id[key].dflag)
             #element[n].find('trace').text = "./jpg/%s.%s.jpg" % (evt.origins[0].time, key)
             #print("XML : %s " % ET.tostring(self.id[key].xml.findall('evt')[n]))
 
