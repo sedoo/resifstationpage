@@ -294,12 +294,12 @@ class Station:
                 continue
             t0 = UTCDateTime(self.id[key].tP) - int(self.id[key].duree) / 5
             t1 = UTCDateTime(self.id[key].tP) + int(self.id[key].duree)
-            print("%s creation jpg st.plot(starttime=%s, endtime=%s, outfile='./jpg/%s_trace_%s.jpg'" % (key, t0, t1, key, self.id[key].dflag))
+            print("%s creation jpg st.plot(starttime=%s, endtime=%s, outfile='%s/jpg/%s_trace_%s.jpg'" % (workingFolder, key, t0, t1, key, self.id[key].dflag))
             if self.id[key].distance <= 5:
                 st_f = self.id[key].st.filter("highpass", freq=2, corners=2, zerophase=True)
-                st_f.plot(starttime=t0+5, endtime=t1, outfile="./jpg/%s_trace_%s.jpg" % (key, self.id[key].dflag), linewidth="0.3")
+                st_f.plot(starttime=t0+5, endtime=t1, outfile="%s/jpg/%s_trace_%s.jpg" % (workingFolder, key, self.id[key].dflag), linewidth="0.3")
             else:
-                self.id[key].st.plot(starttime=t0, endtime=t1, outfile="./jpg/%s_trace_%s.jpg" % (key, self.id[key].dflag), linewidth="0.3")
+                self.id[key].st.plot(starttime=t0, endtime=t1, outfile="%s/jpg/%s_trace_%s.jpg" % (workingFolder, key, self.id[key].dflag), linewidth="0.3")
 
             
     def modif_xml (self, evt, xml):
@@ -333,7 +333,7 @@ class Station:
             element[n].set('lon', str(evt.origins[0].longitude))
             element[n].set('mag', str(evt.magnitudes[0].mag))
             element[n].set('dist', str(self.id[key].distance))
-            element[n].find('trace').text = "./jpg/%s_trace_%s.jpg" % (key, self.id[key].dflag)
+            element[n].find('trace').text = "%s/jpg/%s_trace_%s.jpg" % (workingFolder, key, self.id[key].dflag)
             #element[n].find('trace').text = "./jpg/%s.%s.jpg" % (evt.origins[0].time, key)
             #print("XML : %s " % ET.tostring(self.id[key].xml.findall('evt')[n]))
             
@@ -345,7 +345,7 @@ class Station:
             tday1 = UTCDateTime(t0.year, t0.month, t0.day)
             try:
                 st = client.get_waveforms("FR", key, "00", "HHZ", tday0, tday1)
-                st.plot(type='dayplot', title=t0.day-1, outfile="./jpg/%s" % key)
+                st.plot(type='dayplot', title=t0.day-1, outfile="%s/jpg/%s" % (workingFolder, key)
             except:
                 pass
 
