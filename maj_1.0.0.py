@@ -336,18 +336,7 @@ class Station:
             element[n].find('trace').text = "%s/jpg/%s_trace_%s.jpg" % (workingFolder, key, self.id[key].dflag)
             #element[n].find('trace').text = "./jpg/%s.%s.jpg" % (evt.origins[0].time, key)
             #print("XML : %s " % ET.tostring(self.id[key].xml.findall('evt')[n]))
-            
-    def trace_journaliere (self):
 
-        for key, value in self.id.items():
-            print("trace journaliere de la station : %s" % key)
-            tday0 = UTCDateTime(t0.year, t0.month, t0.day-1)
-            tday1 = UTCDateTime(t0.year, t0.month, t0.day)
-            try:
-                st = client.get_waveforms("FR", key, "00", "HHZ", tday0, tday1)
-                st.plot(type='dayplot', title=t0.day-1, outfile="%s/jpg/%s" % (workingFolder, key)
-            except:
-                pass
 
 deltaT = 86500
 #deltaT = 3600
