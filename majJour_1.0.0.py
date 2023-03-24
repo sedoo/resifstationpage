@@ -37,7 +37,8 @@ for sta in liste_Stations[0]:
     tday1 = UTCDateTime(t0.year, t0.month, t0.day)
     try:
         ficout = workingFolder+"/jpg/%s_journalier.png" % sta.code
-        st = client.get_waveforms("FR", sta.code, "00", "HHZ", tday0, tday1)
+        #st = client.get_waveforms("FR", sta.code, "00", "HHZ", tday0, tday1)
+        st = client.get_waveforms("FR", sta.code, "00", "HHZ", t1, t0)
         # creation du jpg
         echelle = sta[0].response.instrument_sensitivity.value*3*10e-7
         st.plot(type="dayplot", linewidth="0.5", vertical_scaling_range=echelle, outfile=ficout)
