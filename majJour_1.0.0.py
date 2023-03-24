@@ -25,7 +25,8 @@ liste_Stations = client.get_stations(
     starttime=t1,
     endtime=t0,
 #    sta="LABF",
-    format="text",
+    channel="HHZ"
+    level="response"
     )
 
 for sta in liste_Stations[0]:
@@ -37,7 +38,10 @@ for sta in liste_Stations[0]:
     try:
         ficout = workingFolder+"/jpg/%s_journalier.png" % sta.code
         st = client.get_waveforms("FR", sta.code, "00", "HHZ", tday0, tday1)
-        st.plot(type="dayplot", outfile=ficout)
+        # creation du jpg
+        echelle = sta[0].response.instrument_sensitivity.value*3*10e-7
+        st.plot(type="dayplot", linewidth="0.5", vertical_scaling_range=echelle, outfile=ficout)
+        #st.plot(type="dayplot", outfile=ficout)
         print("===> %s" % ficout)
     except:
         pass
