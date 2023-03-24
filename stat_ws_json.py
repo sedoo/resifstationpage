@@ -144,6 +144,7 @@ if __name__ == '__main__':
 
 
 #        ax = plt.subplot(1,1,1)
+        plt.figure(figsize=(12,4.5), dpi=75)
         ax = plt.subplot()
         ax.bar(date, event)
         for label in ax.get_xticklabels():
@@ -151,4 +152,7 @@ if __name__ == '__main__':
 #            label.set_horizontalalignment('right')
 #        ax.xaxis_date()
 #        plt.show()
+        plt.yticks([i for i in range(max(event) + 1)])
         plt.savefig(args['-b'])
+    else:
+        print("pas d'image")
