@@ -296,7 +296,7 @@ class Station:
             t0 = UTCDateTime(self.id[key].tP) - int(self.id[key].duree) / 5
             t1 = UTCDateTime(self.id[key].tP) + int(self.id[key].duree)
             print("%s creation jpg st.plot(starttime=%s, endtime=%s, outfile='%s/jpg/%s_trace_%s.jpg'" % (key, t0, t1, workingFolder, key, self.id[key].dflag))
-            if self.id[key].distance <= 5:
+            if self.id[key].distance <= 10:
                 st_f = self.id[key].st.filter("highpass", freq=2, corners=2, zerophase=True)
                 st_f.plot(starttime=t0+5, endtime=t1, outfile="%s/jpg/%s_trace_%s.jpg" % (workingFolder, key, self.id[key].dflag), linewidth="0.3")
             else:
