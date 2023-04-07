@@ -30,7 +30,7 @@ liste_Stations = client.get_stations(
     )
 
 ### preparation du fichier json
-ficJson = workingFolder+"./json/stations_FR.json"
+ficJson = workingFolder+"/json/stations_FR.json"
 json = """{
     "type": "FeatureCollection",
     "features": ["""
