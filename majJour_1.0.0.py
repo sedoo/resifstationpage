@@ -29,6 +29,12 @@ liste_Stations = client.get_stations(
     level="response"
     )
 
+### preparation du fichier json
+ficJson = "./json/stations_FR.json"
+json = """{
+    "type": "FeatureCollection",
+    "features": ["""
+
 for sta in liste_Stations[0]:
 
     ### creation des fichiers journaliers
@@ -58,3 +64,33 @@ for sta in liste_Stations[0]:
         print("===> %s" % ficjson)
     except:
         pass
+    
+    # ajout de la station à la liste json
+    print("ajout de la station %s a la liste json" % sta.code)
+    try:
+        json = """%s
+            {
+                    "type": "Feature",
+                    "properties": {
+                        "code": "%s",
+                        "agence": "%s",
+                        "en service depuis le": "%s"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [%s, %s]
+                    }
+            },""" % (json, sta.code, sta.operators[0].agencies[0], sta.creation_date, sta.longitude, sta.latitude)
+    except:
+        pass
+
+
+json = """%s
+        {}
+    ]
+}""" % json
+
+#print(json)
+f = open(ficJson, 'w')
+f.write(json)
+f.close()
