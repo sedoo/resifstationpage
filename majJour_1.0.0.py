@@ -30,11 +30,13 @@ liste_Stations = client.get_stations(
     )
 
 ### preparation du fichier json
+ficTmp = workingFolder+"/json/stations_FR.tmp"
 ficJson = workingFolder+"/json/stations_FR.json"
+fic
 json = """{
     "type": "FeatureCollection",
     "features": ["""
-f = open(ficJson, 'w')
+f = open(ficTmp, 'w')
 f.write(json)
 f.close()
 
@@ -84,7 +86,7 @@ for sta in liste_Stations[0]:
                         "coordinates": [%s, %s]
                     }
             },""" % (sta.code, sta.operators[0].agencies[0], sta.creation_date, sta.longitude, sta.latitude)
-        with open(ficJson, 'a') as f:
+        with open(ficTmp, 'a') as f:
             f.write(json)
     except:
         pass
@@ -94,5 +96,6 @@ json = """
         {}
     ]
 }"""
-with open(ficJson, 'a') as f:
+with open(ficTmp, 'a') as f:
     f.write(json)
+shutil.copy2(ficTmp, ficJson)
