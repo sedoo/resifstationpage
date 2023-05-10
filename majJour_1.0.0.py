@@ -93,6 +93,6 @@ for sta in liste_Stations[0]:
 json = """
         {}
     ]
-}""" % json
+}"""
 with open(ficJson, 'a') as f:
     f.write(json)
