@@ -13,4 +13,4 @@ python3 -m pip install matplotlib==3.7.1
 python3 -m pip install ObsPy==1.4.0
 python3 -m pip install docopt==0.6.2
 python3 -m pip install geojson==3.0.1
-python3 -m pip install shutil
+python3 -m pip install shutils
