@@ -34,6 +34,9 @@ ficJson = workingFolder+"/json/stations_FR.json"
 json = """{
     "type": "FeatureCollection",
     "features": ["""
+f = open(ficJson, 'w')
+f.write(json)
+f.close()
 
 for sta in liste_Stations[0]:
 
@@ -68,7 +71,7 @@ for sta in liste_Stations[0]:
     # ajout de la station à la liste json
     print("ajout de la station %s a la liste json" % sta.code)
     try:
-        json = """%s
+        json = """
             {
                     "type": "Feature",
                     "properties": {
@@ -80,17 +83,16 @@ for sta in liste_Stations[0]:
                         "type": "Point",
                         "coordinates": [%s, %s]
                     }
-            },""" % (json, sta.code, sta.operators[0].agencies[0], sta.creation_date, sta.longitude, sta.latitude)
+            },""" % (sta.code, sta.operators[0].agencies[0], sta.creation_date, sta.longitude, sta.latitude)
+        with open(ficJson, 'a') as f:
+            f.write(json)
     except:
         pass
 
 
-json = """%s
+json = """
         {}
     ]
 }""" % json
-
-#print(json)
-f = open(ficJson, 'w')
-f.write(json)
-f.close()
+with open(ficJson, 'a') as f:
+    f.write(json)
