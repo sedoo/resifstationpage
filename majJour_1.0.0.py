@@ -5,6 +5,7 @@ from obspy.core import UTCDateTime
 import subprocess
 import os
 import sys
+import shutil
 
 workingFolder ='.'
 if len(sys.argv)>1:
