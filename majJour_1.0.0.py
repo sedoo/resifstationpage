@@ -27,8 +27,7 @@ liste_Stations = client.get_stations(
     endtime=t0,
   #  sta="VIEF,SLVF",
     channel="HHZ",
-    level="response",
-    nodata="404"
+    level="channel"
     )
 
 ### preparation du fichier json
