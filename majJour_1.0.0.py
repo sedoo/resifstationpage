@@ -25,7 +25,7 @@ liste_Stations = client.get_stations(
     network="FR",
     starttime=t1,
     endtime=t0,
-    sta="LABF",
+    sta="VILS",
     channel="HHZ",
     level="response"
     )
