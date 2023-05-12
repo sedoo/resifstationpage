@@ -27,7 +27,8 @@ liste_Stations = client.get_stations(
     endtime=t0,
     sta="VILS",
     channel="HHZ",
-    level="response"
+    level="response",
+    nodata="404"
     )
 
 ### preparation du fichier json
