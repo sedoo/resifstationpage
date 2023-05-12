@@ -42,7 +42,8 @@ f.write(json)
 f.close()
 
 for sta in liste_Stations[0]:
-
+    if sta.code=="VILS":
+        pass
     ### creation des fichiers journaliers
     print("fichier journalier de la station %s" % sta.code)
     tday0 = UTCDateTime(t0.year, t0.month, t0.day-1)
