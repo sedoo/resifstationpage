@@ -8,10 +8,13 @@ import sys
 import shutil
 
 workingFolder ='.'
+sta_id_lst = ['A*,B*,C*,D*,E*,F*,G*,H*,I*,J*,K*,L*,M*', 'N*,O*,P*,Q*,R*,S*,T*,U*,V*,W*,X*,Y*,Z*']
 if len(sys.argv)>1:
     workingFolder = sys.argv[1]
+    sta_id_lst = sta_id_lst[int(sys.argv[2])]
+    jsonOut = sys.argv[3]
    
-print("Working folder: "+workingFolder)
+print("Working folder: %s\nStation list: %s\nJson file out: %s " % (workingFolder, sta_id_lst, jsonOut))
 
 deltaT = 86500
 t0 = UTCDateTime()
@@ -25,14 +28,15 @@ liste_Stations = client.get_stations(
     network="FR",
     starttime=t1,
     endtime=t0,
-    sta="N*,O*,P*,Q*,R*,S*,T*,U*,V*,W*,X*,Y*,Z*",
+    sta=sta_id_lst,
     channel="HHZ",
     level="channel"
     )
 
 ### preparation du fichier json
-ficTmp = workingFolder+"/json/stations_FR.tmp"
-ficJson = workingFolder+"/json/stations_FR.json"
+#ficTmp = workingFolder+"/json/stations_FR.tmp"
+#ficJson = workingFolder+"/json/stations_FR.json"
+ficJson = workingFolder+"/json/"+jsonOut
 json = """{
     "type": "FeatureCollection",
     "features": ["""
@@ -87,7 +91,7 @@ for sta in liste_Stations[0]:
                         "coordinates": [%s, %s]
                     }
             },""" % (sta.code, sta.operators[0].agencies[0], sta.creation_date, sta.longitude, sta.latitude)
-        with open(ficTmp, 'a') as f:
+        with open(ficJson, 'a') as f:
             f.write(json)
     except:
         pass
@@ -97,6 +101,6 @@ json = """
         {}
     ]
 }"""
-with open(ficTmp, 'a') as f:
+with open(ficJson, 'a') as f:
     f.write(json)
-shutil.copy2(ficTmp, ficJson)
+#shutil.copy2(ficTmp, ficJson)
