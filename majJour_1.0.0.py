@@ -40,7 +40,7 @@ ficJson = workingFolder+"/json/"+jsonOut
 json = """{
     "type": "FeatureCollection",
     "features": ["""
-f = open(ficTmp, 'w')
+f = open(ficJson, 'w')
 f.write(json)
 f.close()
 
