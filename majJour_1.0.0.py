@@ -56,7 +56,7 @@ for sta in liste_Stations[0]:
         #st = client.get_waveforms("FR", sta.code, "00", "HHZ", tday0, tday1)
         st = client.get_waveforms("FR", sta.code, "00", "HHZ", t1, t0)
         # creation du jpg
-        echelle = sta[0].response.instrument_sensitivity.value*3*10e-7
+        echelle = sta[0].response.instrument_sensitivity.value*2*10e-7
         st_f = st[0].filter("highpass", freq=0.01, corners=2, zerophase=True)
         st_f.plot(type="dayplot", linewidth="0.5", vertical_scaling_range=echelle, outfile=ficout)
         #st.plot(type="dayplot", outfile=ficout)
