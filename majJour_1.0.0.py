@@ -49,7 +49,9 @@ for sta in liste_Stations[0]:
     #    pass
     ### creation des fichiers journaliers
     print("fichier journalier de la station %s" % sta.code)
-    tday0 = UTCDateTime(t0.year, t0.month, t0.day-1)
+    #tday0 = UTCDateTime(t0.year, t0.month, t0.day-1)
+    tday0 = t0 - 86400
+    tday0 = UTCDateTime(tday0.year, tday0.month, tday0.day)
     tday1 = UTCDateTime(t0.year, t0.month, t0.day)
     try:
         ficout = workingFolder+"/jpg/%s_journalier.png" % sta.code
