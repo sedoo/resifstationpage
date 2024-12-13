@@ -272,7 +272,7 @@ class Station:
                 continue
             #st_f = st[0].filter("highpass", freq=2, corners=2, zerophase=True)
             tr = st[0].copy()
-            st_f = tr.filter("highpass", freq=2, corners=2, zerophase=True)
+            st_f = tr.filter("highpass", freq=0.2, corners=2, zerophase=True)
             df = st[0].stats.sampling_rate
             cft = classic_sta_lta(st_f, int(df / 2), int(df * 5))
             #plot_trigger(st_f, cft, 7, 4)
