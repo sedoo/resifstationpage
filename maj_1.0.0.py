@@ -341,8 +341,8 @@ class Station:
 
 deltaT = 86500
 #deltaT = 3600
-t0 = UTCDateTime()
-#t0 = UTCDateTime("2026-01-12T00:00:00")
+#t0 = UTCDateTime()
+t0 = UTCDateTime("2025-07-23T00:00:00")
 t1 = t0 - deltaT
 #t1 = UTCDateTime("2022-09-19T18:00:00")
 
